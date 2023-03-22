@@ -16,6 +16,6 @@ public class BallIntetact : Interact
         
     }
     public override void interact() {
-        Debug.Log("2134");
+        Debug.Log("Ball ");
     }
 }

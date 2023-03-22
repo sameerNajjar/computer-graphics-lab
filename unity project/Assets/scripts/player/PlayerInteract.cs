@@ -22,16 +22,12 @@ public class PlayerInteract : MonoBehaviour
 
     }
     public void onEFunc(object obj, EventArgs e) {
-        Debug.Log("e");
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, distance, mask)) {
             if (hit.collider.GetComponent<Interact>() != null) {
                 if(hit.transform.TryGetComponent(out BallIntetact ball)) {
-                    ball.interact();
-                }
-                if (hit.transform.TryGetComponent(out CubeInteract cube)) {
-                    cube.interact();
+              //      ball.interact();
                 }
             }
         }

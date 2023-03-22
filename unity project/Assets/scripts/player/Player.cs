@@ -36,7 +36,6 @@ public class Player : MonoBehaviour {
         controller.Move(velocity * Time.deltaTime);
     }
     public void onJump(object obj, EventArgs e) {
-        Debug.Log("jump");
         if (onGround) {
             velocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }

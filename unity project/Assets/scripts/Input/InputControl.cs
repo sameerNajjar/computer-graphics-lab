@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class InputControl : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class InputControl : MonoBehaviour {
     [SerializeField] private PlayerCamera playerCamera;
     public event EventHandler onJumpPressed;
     public event EventHandler onEPressed;
+    public event EventHandler onShoot;
 
 
     private void Start() {
@@ -29,6 +31,9 @@ public class InputControl : MonoBehaviour {
         }
         if (playerInputAction.player.eInteract.WasPressedThisFrame()) {
             onEPressed?.Invoke(this, EventArgs.Empty);
+        }
+        if (playerInputAction.player.shoot.IsPressed()) {
+            onShoot?.Invoke(this, EventArgs.Empty);
         }
         playerCamera.looking(playerInputAction.player.look.ReadValue<Vector2>());
     }
