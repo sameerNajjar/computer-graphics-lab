@@ -9,6 +9,7 @@ public class InputControl : MonoBehaviour {
     [SerializeField] private PlayerInput playerInputAction;
     [SerializeField] private PlayerCamera playerCamera;
     public event EventHandler onJumpPressed;
+    public event EventHandler onEPressed;
 
 
     private void Start() {
@@ -25,6 +26,9 @@ public class InputControl : MonoBehaviour {
     private void Update() {
         if (playerInputAction.player.jump.WasPressedThisFrame()) {
             onJumpPressed?.Invoke(this, EventArgs.Empty);
+        }
+        if (playerInputAction.player.eInteract.WasPressedThisFrame()) {
+            onEPressed?.Invoke(this, EventArgs.Empty);
         }
         playerCamera.looking(playerInputAction.player.look.ReadValue<Vector2>());
     }
