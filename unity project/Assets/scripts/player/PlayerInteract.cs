@@ -21,13 +21,25 @@ public class PlayerInteract : MonoBehaviour
     {
 
     }
+    public Interact getInteractObj() {
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, distance, mask)) {
+            if (hit.collider.GetComponent<Interact>() != null) {
+                if (hit.transform.TryGetComponent(out Interact interactable)) {
+                    return interactable;
+                }
+            }
+        }
+            return null;
+    }
     public void onEFunc(object obj, EventArgs e) {
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, distance, mask)) {
             if (hit.collider.GetComponent<Interact>() != null) {
                 if(hit.transform.TryGetComponent(out BallIntetact ball)) {
-              //      ball.interact();
+                    ball.interact();
                 }
             }
         }

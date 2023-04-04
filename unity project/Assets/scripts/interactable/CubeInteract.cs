@@ -17,5 +17,6 @@ public class CubeInteract : Interact
     }
     public override void interact() {
         Debug.Log("cube");
+        Destroy(gameObject);
     }
 }

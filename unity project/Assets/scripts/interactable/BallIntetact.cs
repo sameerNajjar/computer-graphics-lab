@@ -17,5 +17,6 @@ public class BallIntetact : Interact
     }
     public override void interact() {
         Debug.Log("Ball ");
+        Destroy(gameObject);
     }
 }
