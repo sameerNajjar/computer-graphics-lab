@@ -9,7 +9,16 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected float range;
     [SerializeField] protected float fireRate;
     [SerializeField] protected float nextFire;
+    [SerializeField] protected float lastShootTime;
     [SerializeField] protected InputControl inputControl;
+    [SerializeField] protected bool bulletSpread=true;
+    [SerializeField] protected Vector3  spreadVariance = new Vector3(0.5f, 0.5f, 0.5f);
+    [SerializeField] protected ParticleSystem shooting;
+    [SerializeField] protected Transform bulletSpawnPoint;
+    [SerializeField] protected ParticleSystem impactParticle;
+    [SerializeField] protected TrailRenderer bulletTrail;
+    [SerializeField] protected Animator animator; //maybe i will use it to create reciol in the future
+    [SerializeField] protected float BulletSpeed = 100;
     public Camera cam;
     void Start() {
     }
