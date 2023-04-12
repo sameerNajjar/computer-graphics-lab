@@ -1,7 +1,10 @@
 # computer-graphics-lab
 Student: Sameer Najjar 
+
 ID: 212186613
+
 project: 3d fps game with particles abilites.
+
 # week 1
     learn unity basics and  implemnt the player movment , jumping , simple ablity to interact , simple shooting method .
     (in total 8+ hours of work )
