@@ -1280,7 +1280,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29736
+  m_Name: pb_Mesh29744
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2400,7 +2400,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -2523,7 +2523,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29876
+  m_Name: pb_Mesh29882
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3346,6 +3346,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 104392473}
+  - {fileID: 1169565595}
   m_Father: {fileID: 758859550}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5436,7 +5437,7 @@ GameObject:
   - component: {fileID: 1169565594}
   - component: {fileID: 1169565593}
   - component: {fileID: 1169565592}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5493,7 +5494,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 963194227}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -5518,8 +5519,8 @@ RectTransform:
   m_Children:
   - {fileID: 1298561850}
   - {fileID: 79413433}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 963194228}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5542,7 +5543,7 @@ GameObject:
   - component: {fileID: 1298561850}
   - component: {fileID: 1298561852}
   - component: {fileID: 1298561851}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: AimCroos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5717,7 +5718,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1335161503
 Mesh:
@@ -6242,7 +6243,7 @@ Transform:
   - {fileID: 1662467253}
   - {fileID: 797860433}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1422147327
 Mesh:
@@ -6414,7 +6415,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29752
+  m_Name: pb_Mesh29794
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7496,7 +7497,7 @@ Transform:
   - {fileID: 239408371}
   - {fileID: 10912623}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1875984480
 GameObject:
@@ -7594,7 +7595,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1875984485
 MonoBehaviour:
@@ -8095,7 +8096,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29796
+  m_Name: pb_Mesh29846
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8530,6 +8531,18 @@ PrefabInstance:
       propertyPath: bulletSpawnPoint
       value: 
       objectReference: {fileID: 986957750}
+    - target: {fileID: 5932290850291642284, guid: a2061d4e3970b4341be536d6657cbead, type: 3}
+      propertyPath: spreadVariance.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932290850291642284, guid: a2061d4e3970b4341be536d6657cbead, type: 3}
+      propertyPath: spreadVariance.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932290850291642284, guid: a2061d4e3970b4341be536d6657cbead, type: 3}
+      propertyPath: spreadVariance.z
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 5932290850842954385, guid: a2061d4e3970b4341be536d6657cbead, type: 3}
       propertyPath: m_RootOrder
       value: 0

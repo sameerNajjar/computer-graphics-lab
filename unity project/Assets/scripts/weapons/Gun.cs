@@ -12,7 +12,7 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected float lastShootTime;
     [SerializeField] protected InputControl inputControl;
     [SerializeField] protected bool bulletSpread=true;
-    [SerializeField] protected Vector3  spreadVariance = new Vector3(0.5f, 0.5f, 0.5f);
+    [SerializeField] protected Vector3  spreadVariance = new Vector3(0.01f, 0.01f, 0.01f);
     [SerializeField] protected ParticleSystem shooting;
     [SerializeField] protected Transform bulletSpawnPoint;
     [SerializeField] protected ParticleSystem impactParticle;
