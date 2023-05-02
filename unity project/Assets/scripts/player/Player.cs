@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private Transform groundCheck;
     [SerializeField] private CharacterController controller;
     [SerializeField] Vector3 velocity=Vector3.zero;
+    [SerializeField] private float  health=100;
+    
     void Start() {
         controller= GetComponent<CharacterController>();
         inputControl.onJumpPressed += onJump;
@@ -38,6 +40,13 @@ public class Player : MonoBehaviour {
     public void onJump(object obj, EventArgs e) {
         if (onGround) {
             velocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        }
+    }
+    public void takeDMG(float dmg) {
+        health -= dmg;
+        Debug.Log("shit health" + health);
+        if (health <= 0) {
+            Destroy(gameObject);
         }
     }
 }

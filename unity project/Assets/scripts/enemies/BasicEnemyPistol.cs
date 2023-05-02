@@ -2,10 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Pistol : Gun {
+public class BasicEnemyPistol : Gun {
     public LayerMask enemyMask;
     void Start() {
-        inputControl.onShoot += shoot;
     }
 
     void Update() {
@@ -14,27 +13,37 @@ public class Pistol : Gun {
     private void Awake() {
         animator = GetComponent<Animator>();
     }
-    public virtual void shoot(object obj, EventArgs e) {
+
+    private Vector3 bulletDirection(Vector3 playPosition) {
+        Vector3 direction = playPosition;
+        if (bulletSpread) {
+            direction += new Vector3(
+                UnityEngine.Random.Range(-spreadVariance.x, spreadVariance.x),
+                UnityEngine.Random.Range(-spreadVariance.y, spreadVariance.y),
+                UnityEngine.Random.Range(-spreadVariance.z, spreadVariance.z));
+            direction.Normalize();
+        }
+        return direction;
+    }
+    public virtual void shoot(Vector3 playPosition) {
         RaycastHit hit;
         if (lastShootTime + fireRate < Time.time) {
             shooting.Play();
-            if (Physics.Raycast(cam.transform.position, bulletDirection(), out hit, range)) {
+            if (Physics.Raycast(transform.position, bulletDirection(playPosition), out hit, range)) {
                 TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
                 lastShootTime = Time.time;
                 BasicEnemy enemy = null;
                 Debug.Log(hit.collider.gameObject.layer);
-                if (hit.collider.gameObject.layer == 9) {
-                    Debug.Log("hit some shit ");
-                    enemy = hit.collider.gameObject.GetComponent<BasicEnemy>();
-                }
-                if (enemy != null) {
-                    enemy.takeDMG(dmg);
+                if (hit.collider.gameObject.layer == 8) {
+                    Debug.Log("hit the shit ");
+                    Player player=hit.collider.gameObject.GetComponent<Player>();
+                    player.takeDMG(dmg);
                 }
             }
             else {
                 TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, bulletSpawnPoint.position + bulletDirection() * 100, Vector3.zero, false));
+                StartCoroutine(SpawnTrail(trail, bulletSpawnPoint.position + bulletDirection(playPosition) * 100, Vector3.zero, false));
                 lastShootTime = Time.time;
             }
         }
@@ -58,15 +67,5 @@ public class Pistol : Gun {
         }
         Destroy(Trail.gameObject, Trail.time);
     }
-    private Vector3 bulletDirection() {
-        Vector3 direction = cam.transform.forward;
-        if (bulletSpread) {
-            direction += new Vector3(
-                UnityEngine.Random.Range(-spreadVariance.x, spreadVariance.x),
-                UnityEngine.Random.Range(-spreadVariance.y, spreadVariance.y),
-                UnityEngine.Random.Range(-spreadVariance.z, spreadVariance.z));
-            direction.Normalize();
-        }
-        return direction;
-    }
+
 }

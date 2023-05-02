@@ -13,9 +13,9 @@ TagManager:
   - UI
   - ground
   - interact
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - obstacle
   - 
   - 
   - 

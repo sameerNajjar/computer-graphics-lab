@@ -21,3 +21,8 @@ project: 3d fps game with particles abilites.
 	video of the current progress:
 https://youtu.be/AiwKF44i9Uk
 # week 4
+    holidays  
+# week 5
+    create a basic enemy ai that move randomly aroud his given place , if he detect the play ,
+	follow him and if the player is in range shoot him (his aim is so bad i need to fix it later )
+	if the player is out of range go back the original and move randomly to find the player .
