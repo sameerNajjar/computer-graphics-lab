@@ -22,11 +22,11 @@ public class Pistol : Gun {
                 TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
                 lastShootTime = Time.time;
-                BasicEnemy enemy = null;
+                BasicEnemyAi enemy = null;
                 Debug.Log(hit.collider.gameObject.layer);
                 if (hit.collider.gameObject.layer == 9) {
                     Debug.Log("hit some shit ");
-                    enemy = hit.collider.gameObject.GetComponent<BasicEnemy>();
+                    enemy = hit.collider.gameObject.GetComponent<BasicEnemyAi>();
                 }
                 if (enemy != null) {
                     enemy.takeDMG(dmg);

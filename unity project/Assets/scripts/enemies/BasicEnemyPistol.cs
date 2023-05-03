@@ -33,7 +33,6 @@ public class BasicEnemyPistol : Gun {
                 TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
                 lastShootTime = Time.time;
-                BasicEnemy enemy = null;
                 Debug.Log(hit.collider.gameObject.layer);
                 if (hit.collider.gameObject.layer == 8) {
                     Debug.Log("hit the shit ");

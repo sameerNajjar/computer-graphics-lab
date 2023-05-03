@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 public class BasicEnemyAi : MonoBehaviour
 {
+    [SerializeField] private float health = 100f;
+
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
@@ -18,6 +20,7 @@ public class BasicEnemyAi : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
     public BasicEnemyPistol pistol;
+
     private void Awake() {
         player = GameObject.Find("player").transform;
         agent = GetComponent<NavMeshAgent>();
@@ -76,6 +79,21 @@ public class BasicEnemyAi : MonoBehaviour
     }
     private void ResetAttack() {
         alreadyAttacked = false;
+    }
+    public void takeDMG(float dmg) {
+        if (health - dmg > 0) {
+            health -= dmg;
+            AttackPlayer();
+        }
+        else {
+            health = 0;
+            Die();
+        }
+        Debug.Log(health);
+
+    }
+    public void Die() {
+        Destroy(gameObject);
     }
 
 }
