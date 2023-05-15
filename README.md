@@ -28,4 +28,12 @@ https://youtu.be/AiwKF44i9Uk
 	original and move randomly to find the player .
 	(in total 6 hours of work ).
 # week 6
- 
+    start to work on the powder game part using a system like SPH which was very slow and didnt work in the end so 
+	I deleted everything and decided to start over next week with a grid-based system.(in total 8 hours of work)
+# week 7
+    create the grid-based system using a 3d array , implement the camera movement for the grid word and create 
+	a simple falling sand that fall from the sky and implement a sand behavior that contorl the sand falling and movment 
+	logic , currently this behavior isnt perfect and some improvement (in total 10 hours of work ).
+	video of the current progress:
+	https://youtu.be/oLZWX5oUBW8
+
