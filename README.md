@@ -32,9 +32,10 @@ https://youtu.be/AiwKF44i9Uk
 	in the end so I deleted everything and decided to start over next week with a grid-based system.
 	(in total 8 hours of work).
 # week 7
-    create the grid-based system using a 3d array , implement the camera movement for the grid word and create 
-	a simple falling sand that fall from the sky and implement a sand behavior that contorl the sand falling
-	and movment logic , currently this behavior isnt perfect and some improvement (in total 10 hours of work ).
+    create the grid-based system using a 3d array , implement the camera movement for the grid word and  
+	create a simple falling sand that fall from the sky and implement a sand behavior that contorl the sand 
+	falling and movment logic , currently this behavior isnt perfect and some improvement.
+	(in total 10 hours of work ).
 	video of the current progress:
-	https://youtu.be/oLZWX5oUBW8
+https://youtu.be/oLZWX5oUBW8
 
