@@ -1,11 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WordGrid : MonoBehaviour {
-    [SerializeField] private GameObject cubePrefab; 
+    [SerializeField] private GameObject currentElemnt; 
     [SerializeField] private int xSize = 20; 
     [SerializeField] private int ySize = 15; 
     [SerializeField] private int zSize = 20; 
-    [SerializeField] private GameObject[,,] cubeGrid; 
+    [SerializeField] private GameObject[,,] cubeGrid;
+    [SerializeField] private GameObject sand;
+    [SerializeField] private GameObject water;
+    [SerializeField] private GameObject snow;
+    [SerializeField] private GameObject lava;
+
 
     private void Start() {
         cubeGrid = new GameObject[xSize, ySize, zSize];
@@ -114,11 +120,22 @@ public class WordGrid : MonoBehaviour {
                     int y = ySize - 1; 
                     if (cubeGrid[x, y, z] == null || cubeGrid[x, y, z].GetComponent<BoxCollider>() == null) {
                         Vector3 cubePosition = new Vector3(x, y, z);
-                        GameObject cube = Instantiate(cubePrefab, cubePosition, Quaternion.identity);
+                        GameObject cube = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
                         cubeGrid[x, y, z] = cube;
                     }
                 }
             }
+        }
+    }
+    public void HandleButtonClick() {
+        // Get the button that called this method
+        Debug.Log("button clicked");
+        Button clickedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+        if (clickedButton.name==("Sand Button")) {
+            currentElemnt = sand;
+                }
+        else if ((clickedButton.name==("Water Button"))) {
+            currentElemnt = water;
         }
     }
 }
