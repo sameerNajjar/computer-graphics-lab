@@ -4,8 +4,9 @@ Student: Sameer Najjar
 
 ID: 212186613
 
-project: 3d fps game with particles abilites.
+Project: 3D fps game + 3D Powder Game.
 
+Project directed by: Dr. Roi Poranne
 # week 1
     learn unity basics and  implemnt the player movment , jumping , simple ablity
 	to interact , simple shooting method (in total 8+ hours of work ).
@@ -38,4 +39,18 @@ https://youtu.be/AiwKF44i9Uk
 	(in total 10 hours of work ).
 	video of the current progress:
 https://youtu.be/oLZWX5oUBW8
+# week 8
+ - Fix the sand movment 
+ - improve and increase the size of the game grid 
+ - create a gui to chose the elements and to clear the grid 
+ - add 3 new elemnt :
+  - water
+  - snow
+  - lava 
+ - the elemnt interact with each other in this way :
+  - snow melt after 15 second and become water
+  	- lava evaporation the water then disappear 
+	- lava melt the snow immediately then disappear 
+	- water flow over the sand 
+ - over all about 7 hours of work 
 
