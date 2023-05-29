@@ -22,15 +22,6 @@ public class WordGrid : MonoBehaviour {
 
     private void Start() {
         cubeGrid = new GameObject[xSize, ySize, zSize];
-        for (int x = 0; x < xSize; x++) {
-            for (int y = 0; y < ySize; y++) {
-                for (int z = 0; z < zSize; z++) {
-                    //Vector3 cubePosition = new Vector3(x, y, z);
-                    //GameObject cube = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                    //cubeGrid[x, y, z] = cube;
-                }
-            }
-        }
     }
 
     private void Update() {
@@ -48,8 +39,8 @@ public class WordGrid : MonoBehaviour {
                             continue;
                         }
                         if (cubeGrid[x, y, z].name == ("Lava(Clone)")) {
-                            CellBehavior(x, y, z, 2);
                             ElemntsInteract(x, y, z, 2);
+                            CellBehavior(x, y, z, 2);
                             continue;
                         }
                         if (cubeGrid[x, y, z].name == ("Snow(Clone)")) {
@@ -62,33 +53,49 @@ public class WordGrid : MonoBehaviour {
         }
     }
     private void ElemntsInteract(int x, int y, int z, int cellType) {
-        Vector3Int[] neighborOffsets = new Vector3Int[4];
-        neighborOffsets[0] = new Vector3Int(x - 1, y, z);   // Left
-        neighborOffsets[1] = new Vector3Int(x + 1, y, z);   // Right
-        neighborOffsets[2] = new Vector3Int(x, y, z - 1);   // Front
-        neighborOffsets[3] = new Vector3Int(x, y, z + 1);   // Back
+        Vector3Int[] neighborOffsets = new Vector3Int[]
+        {
+        new Vector3Int(x - 1, y, z),   // Left
+        new Vector3Int(x + 1, y, z),   // Right
+        new Vector3Int(x, y, z - 1),   // Front
+        new Vector3Int(x, y, z + 1),   // Back
+        new Vector3Int(x, y - 1, z),   // Bottom
+        new Vector3Int(x, y + 1, z)    // Top
+        };
+
         foreach (Vector3Int offset in neighborOffsets) {
-            int neighborX = x + offset.x;
-            int neighborY = y + offset.y;
-            int neighborZ = z + offset.z;
+            int neighborX = offset.x;
+            int neighborY = offset.y;
+            int neighborZ = offset.z;
+
             if (IsInBounds(neighborX, neighborY, neighborZ) && cubeGrid[neighborX, neighborY, neighborZ] != null) {
-                if (cellType == 2 && cubeGrid[neighborX, neighborY, neighborZ].name == ("Water(Clone)")) {
-                    //lava and water destroy each other
+                if (cellType == 2 && cubeGrid[neighborX, neighborY, neighborZ].name == "Water(Clone)") {
+                    // Lava and water destroy each other
                     Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
                     Destroy(cubeGrid[x, y, z]);
                 }
-                if (cellType == 2 && cubeGrid[neighborX, neighborY, neighborZ].name == ("Snow(Clone)")) {
-                    ////lava and snow destroy each other and create  water 
+                if (cellType == 2 && cubeGrid[neighborX, neighborY, neighborZ].name == "Snow(Clone)") {
+                    // Lava and snow destroy each other and create water
                     Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
                     Destroy(cubeGrid[x, y, z]);
                     Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
                     GameObject cube = Instantiate(water, cubePosition, Quaternion.identity);
                     cubeGrid[neighborX, neighborY, neighborZ] = cube;
+                    Debug.Log("sdf");
                 }
             }
         }
     }
-
+    private IEnumerator DelayedDestroy(int x, int y, int z, int neighborX, int neighborY, int neighborZ, int celltype) {
+        yield return new WaitForSeconds(2f);
+        Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
+        Destroy(cubeGrid[x, y, z]);
+        if (celltype == 1) {
+            Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
+            GameObject cube = Instantiate(water, cubePosition, Quaternion.identity);
+            cubeGrid[neighborX, neighborY, neighborZ] = cube;
+        }
+    }
     private IEnumerator MeltSnowAndCreateWater(GameObject snow) {
         yield return new WaitForSeconds(5f); // Wait for 15 seconds
         if (snow != null) {// Destroy the snow cell
@@ -114,14 +121,14 @@ public class WordGrid : MonoBehaviour {
         if (cellType == 0 || cellType == 3) {// sand and ice
             neighborOffsets = new Vector3Int[]
             {
-                new Vector3Int(-1, -2, 1),    // Left
-                new Vector3Int(-1, -2, 0),     // Right
-                new Vector3Int(-1, -2, -1),    // Back
-                new Vector3Int(0, -2, 1),     // Front
-                new Vector3Int(0, -2, -1),   // Bottom Left
-                new Vector3Int(1, -2, 1),    // Bottom Right
-                new Vector3Int(1, -2, 0),    // Bottom Right
-                new Vector3Int(1, -2, -1),    // Bottom Right
+                new Vector3Int(-1, -3, 1),    // Left
+                new Vector3Int(-1, -3, 0),     // Right
+                new Vector3Int(-1, -3, -1),    // Back
+                new Vector3Int(0, -3, 1),     // Front
+                new Vector3Int(0, -3, -1),   // Bottom Left
+                new Vector3Int(1, -3, 1),    // Bottom Right
+                new Vector3Int(1, -3, 0),    // Bottom Right
+                new Vector3Int(1, -3, -1),    // Bottom Right
             };
         }
         else if (cellType == 1 || cellType == 2) { // water and lava
@@ -220,7 +227,6 @@ public class WordGrid : MonoBehaviour {
                         }
                     }
                 }
-
                 spawnTimer = spawnRate;
             }
         }

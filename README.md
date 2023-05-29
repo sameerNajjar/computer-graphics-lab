@@ -7,6 +7,10 @@ ID: 212186613
 Project: 3D fps game + 3D Powder Game.
 
 Project directed by: Dr. Roi Poranne
+
+Project Playlist:
+https://www.youtube.com/playlist?list=PLOvCmpy3lU4yshcjsMLpbFAtVgZafQdbi
+
 # week 1
     learn unity basics and  implemnt the player movment , jumping , simple ablity
 	to interact , simple shooting method (in total 8+ hours of work ).
@@ -34,8 +38,8 @@ https://youtu.be/AiwKF44i9Uk
 	(in total 8 hours of work).
 # week 7
     create the grid-based system using a 3d array , implement the camera movement for the grid word and  
-	create a simple falling sand that fall from the sky and implement a sand behavior that contorl the sand 
-	falling and movment logic , currently this behavior isnt perfect and some improvement.
+	create a simple falling sand that fall from the sky and implement a sand behavior that contorl the  
+	sand falling and movment logic , currently this behavior isnt perfect and some improvement.
 	(in total 10 hours of work ).
 	video of the current progress:
 https://youtu.be/oLZWX5oUBW8
@@ -48,9 +52,10 @@ https://youtu.be/oLZWX5oUBW8
   - snow
   - lava 
  - the elemnt interact with each other in this way :
-  - snow melt after 15 second and become water
+    - snow melt after 5 second and become water
   	- lava evaporation the water then disappear 
 	- lava melt the snow immediately then disappear 
 	- water flow over the sand 
  - over all about 7 hours of work 
-
+ - video of the current progress:
+    - https://youtu.be/3V1-NIaClNo
