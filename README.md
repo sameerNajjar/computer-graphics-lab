@@ -60,7 +60,7 @@ https://youtu.be/oLZWX5oUBW8
  - video of the current progress:
     - https://youtu.be/wh65bEyY1gs
 # week 9
-    no progres this week dou to preparing for the sminar in computer graphics and HWs in other courses
+    no progress this week due to preparing for the seminar in computer graphics and HWs in other courses
 # week 10
   - add 3 new elemnt :
     - stone
