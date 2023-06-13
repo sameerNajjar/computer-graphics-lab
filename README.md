@@ -48,9 +48,9 @@ https://youtu.be/oLZWX5oUBW8
  - improve and increase the size of the game grid 
  - create a gui to chose the elements and to clear the grid 
  - add 3 new elemnt :
-  - water
-  - snow
-  - lava 
+    - water
+    - snow
+    - lava 
  - the elemnt interact with each other in this way :
     - snow melt after 5 second and become water
   	- lava evaporation the water then disappear 
@@ -59,3 +59,17 @@ https://youtu.be/oLZWX5oUBW8
  - over all about 7 hours of work 
  - video of the current progress:
     - https://youtu.be/wh65bEyY1gs
+# week 9
+    no progres this week dou to preparing for the sminar in computer graphics and HWs in other courses
+# week 10
+  - add 3 new elemnt :
+    - stone
+    - acid
+    - smoke 
+  - the elemnt interact with each other in this way :
+    - acid melt melt every other elemnt and disappear after 10 seconds
+    - stone is a solid elemnt that doest interact with other elemnt 
+    - smoke appears when melting elemnts in interacts like lava and water , acid with other elemnt .
+  - over all about 4 hours of work 
+
+

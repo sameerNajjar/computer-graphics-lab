@@ -5,15 +5,22 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 using System.Collections;
 public class WordGrid : MonoBehaviour {
     [SerializeField] private GameObject currentElemnt;
-    [SerializeField] private int xSize = 40;
+    [SerializeField] private int xSize = 80;
     [SerializeField] private int ySize = 20;
-    [SerializeField] private int zSize = 40;
+    [SerializeField] private int zSize = 80;
     private GameObject[,,] cubeGrid;
     [SerializeField] private GameObject sand;
     [SerializeField] private GameObject water;
     [SerializeField] private GameObject snow;
     [SerializeField] private GameObject lava;
-    [SerializeField] private float spawnRate = 0.15f;
+    [SerializeField] private GameObject smoke;
+    [SerializeField] private GameObject acid;
+    [SerializeField] private GameObject stone;
+    [SerializeField] private GameObject fire;
+    [SerializeField] private GameObject cloud;
+    [SerializeField] private GameObject oil;
+
+    [SerializeField] private float spawnRate = 0.1f;
     private float spawnTimer = 0f;
     private bool isMouseDown = false;
     [SerializeField] private float moveDelay = 0.4f;
@@ -244,6 +251,24 @@ public class WordGrid : MonoBehaviour {
         }
         else if ((clickedButton.name == ("lava Button"))) {
             currentElemnt = lava;
+        }
+        else if ((clickedButton.name == ("Acid Button"))) {
+            currentElemnt = acid;
+        }
+        else if ((clickedButton.name == ("Stone Button"))) {
+            currentElemnt = stone;
+        }
+        else if ((clickedButton.name == ("Smoke Button"))) {
+            currentElemnt = smoke;
+        }
+        else if ((clickedButton.name == ("Fire Button"))) {
+            currentElemnt = fire;
+        }
+        else if ((clickedButton.name == ("Oil Button"))) {
+            currentElemnt = oil;
+        }
+        else if ((clickedButton.name == ("Cloud Button"))) {
+            currentElemnt = cloud;
         }
     }
     public void ClearGrid() {
