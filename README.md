@@ -71,5 +71,8 @@ https://youtu.be/oLZWX5oUBW8
     - stone is a solid elemnt that doest interact with other elemnt 
     - smoke appears when melting elemnts in interacts like lava and water , acid with other elemnt .
   - over all about 4 hours of work 
+# week 11
+    no progress this week due to final exams
+# week 12
 
 
