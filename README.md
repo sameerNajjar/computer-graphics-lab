@@ -74,5 +74,19 @@ https://youtu.be/oLZWX5oUBW8
 # week 11
     no progress this week due to final exams
 # week 12
+  - fix bugs and improve the elemnts interacting with each other 
+  - add 3 new elemnt :
+    - fire
+    - oil
+    - cloud 
+  - the elemnt interact with each other in this way :
+    - fire:
+      - burn elemnts like oil and acid  and convert it to fire
+      - melt snow 
+      - water extinguished the fire
+      - fire disappear after 10 seconds 
+    - oil flow over water and can ignite by fire .
+    - clouds appers after the evaporation of water and after 10 seconds it will rain water and disappear  .
+  - over all about 6 hours of work 
 
 
