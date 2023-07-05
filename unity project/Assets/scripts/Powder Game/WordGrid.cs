@@ -4,13 +4,14 @@ using UnityEngine.UI;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using System.Collections;
 using static UnityEditor.Experimental.GraphView.GraphView;
-
+using TMPro;
 public class WordGrid : MonoBehaviour {
+    [SerializeField] private TextMeshProUGUI output;
     [SerializeField] private GameObject currentElemnt;
     [SerializeField] private int xSize = 80;
     [SerializeField] private int ySize = 20;
     [SerializeField] private int zSize = 80;
-    private GameObject[,,] cubeGrid;
+    [SerializeField] private GameObject[,,] cubeGrid;
     [SerializeField] private GameObject sand;// 0
     [SerializeField] private GameObject water;// 1
     [SerializeField] private GameObject lava;// 2
@@ -21,7 +22,7 @@ public class WordGrid : MonoBehaviour {
     [SerializeField] private GameObject fire;// 7
     [SerializeField] private GameObject oil;// 8
     [SerializeField] private GameObject cloud;// 9
-
+    [SerializeField] private static int spawnNumber = 0;
     [SerializeField] private float spawnRate = 0.1f;
     private float spawnTimer = 0f;
     private bool isMouseDown = false;
@@ -40,7 +41,7 @@ public class WordGrid : MonoBehaviour {
             for (int y = 0; y < ySize; y++) {
                 for (int z = 0; z < zSize; z++) {
                     if (cubeGrid[x, y, z] != null) {
-                            if (cubeGrid[x, y, z].name == ("Sand(Clone)")) {
+                        if (cubeGrid[x, y, z].name == ("Sand(Clone)")) {
                                 CellBehavior(x, y, z, 0);
                                 continue;
                             }
@@ -305,23 +306,50 @@ public class WordGrid : MonoBehaviour {
                     if (x >= 0 && x < xSize && z >= 0 && z < zSize) {
                         int y = ySize - 1;
                         if (cubeGrid[x, y, z] == null || cubeGrid[x, y, z].GetComponent<BoxCollider>() == null) {
-                            Vector3 cubePosition = new Vector3(x, y, z);
-                            cubeGrid[x, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity); ;
-                            if (cubeGrid[x, y, z].name == "Snow(Clone)") {
-                                StartCoroutine(destroyCounter(cubeGrid[x, y, z], 5, 3));
+                            if (spawnNumber == 1) {
+                                Vector3 cubePosition = new Vector3(x, y, z);
+                                cubeGrid[x, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x, y, z]);
                             }
-                            if (cubeGrid[x, y, z].name == "Acid(Clone)") {
-                                StartCoroutine(destroyCounter(cubeGrid[x, y, z], 5, 4));
+                            if (spawnNumber == 0) {
+                                Vector3 cubePosition = new Vector3(x, y, z);
+                                cubeGrid[x, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x, y, z]);
+
+                                cubePosition = new Vector3(x + 1, y, z);
+                                cubeGrid[x + 1, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x + 1, y, z]);
+
+                                cubePosition = new Vector3(x - 1, y, z);
+                                cubeGrid[x - 1, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x - 1, y, z]);
+
+                                cubePosition = new Vector3(x , y, z + 1);
+                                cubeGrid[x, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x, y, z + 1]);
+
+                                cubePosition = new Vector3(x + 1, y, z + 1);
+                                cubeGrid[x + 1, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x + 1, y, z + 1]);
+
+                                cubePosition = new Vector3(x-1, y, z + 1);
+                                cubeGrid[x - 1, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x - 1, y, z + 1]);
+
+                                cubePosition = new Vector3(x, y, z-1);
+                                cubeGrid[x, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x, y, z - 1]);
+
+                                cubePosition = new Vector3(x-1, y, z-1);
+                                cubeGrid[x - 1, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x - 1, y, z - 1]);
+
+                                cubePosition = new Vector3(x + 1, y, z - 1);
+                                cubeGrid[x + 1, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                AutuDestroy(cubeGrid[x + 1, y, z - 1]);
                             }
-                            if (cubeGrid[x, y, z].name == "Smoke(Clone)") {
-                                StartCoroutine(destroyCounter(cubeGrid[x, y, z], 10, 4));
-                            }
-                            if (cubeGrid[x, y, z].name == "Fire(Clone)") {
-                                StartCoroutine(destroyCounter(cubeGrid[x, y, z], 10, 7));
-                            }
-                            if (cubeGrid[x, y, z].name == "Cloud(Clone)") {
-                                StartCoroutine(destroyCounter(cubeGrid[x, y, z], 10, 9));
-                            }
+
+
                         }
                     }
                     spawnTimer = spawnRate;
@@ -329,7 +357,29 @@ public class WordGrid : MonoBehaviour {
             }
         }
     }
-    public void HandleButtonClick() {
+
+    public void AutuDestroy(GameObject cube) {
+        if (cube.name == "Snow(Clone)") {
+            StartCoroutine(destroyCounter(cube, 5, 3));
+        }
+        if (cube.name == "Acid(Clone)") {
+            StartCoroutine(destroyCounter(cube, 5, 4));
+        }
+        if (cube.name == "Smoke(Clone)") {
+            StartCoroutine(destroyCounter(cube, 10, 4));
+        }
+        if (cube.name == "Fire(Clone)") {
+            StartCoroutine(destroyCounter(cube, 10, 7));
+        }
+        if (cube.name == "Cloud(Clone)") {
+            StartCoroutine(destroyCounter(cube, 10, 9));
+        }
+    }
+    public void HandleDropDown(int index) {
+        spawnNumber = index;
+    }
+
+        public void HandleButtonClick() {
         Button clickedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
         if (clickedButton.name == ("Sand Button")) {
             currentElemnt = sand;

@@ -88,5 +88,16 @@ https://youtu.be/oLZWX5oUBW8
     - oil flow over water and can ignite by fire .
     - clouds appers after the evaporation of water and after 10 seconds it will rain water and disappear  .
   - over all about 6 hours of work 
+fix some interactrs and program speed 
+# week 13
+  - work on the gui of the game :
+    - create the game main menu
+	- create the pause menu
+	- improve and change the game gui
+  - add a new feature that allow the user to change the grid spawn size :
+    - 1*1 
+	- 3*3
+  - over all about 8 hours of work 
+	
 
 
