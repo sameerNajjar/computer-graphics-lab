@@ -2,9 +2,7 @@
 
 Student: Sameer Najjar 
 
-ID: 212186613
-
-Project: 3D fps game + 3D Powder Game.
+Project: 3D Powder Game.
 
 Project directed by: Dr. Roi Poranne
 
@@ -98,6 +96,22 @@ fix some interactrs and program speed
     - 1*1 
 	- 3*3
   - over all about 8 hours of work 
-	
+# week 14
+  - no progress this week, final exams.
+#week 15 
+  - add the Final two elements
+     - salt:
+        - Dissolves in water 
+        - convert the water to salty water and if this water gets evaporation the salt will appear again.
+        - act like sand and snow in  term of movment 
+	 - wood:
+           - flow over water
+           - can get burned by lava and fire 
+  - fix a bug that caused the elemnts to spawn out of the grid index and crash the game
+  - improve the elements interactions and fix some bugs (there are more and harder bugs that i still need to fix)
+  - improve the game stability and performance 
+  - some changes in the elemnts materials 
+  - fix a bug that makes all fluids apple to move throw walls
+  - over all about 8 hours of work 
 
 

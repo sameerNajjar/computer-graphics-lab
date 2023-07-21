@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
-    [SerializeField] private float moveSpeed = 10f;
-    [SerializeField] private float rotateSpeed = 5f;
+    [SerializeField] private float moveSpeed = 15f;
+    [SerializeField] private float rotateSpeed = 3f;
     [SerializeField] private GameObject camera;
 
     private void Update() {

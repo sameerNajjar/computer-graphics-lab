@@ -9,7 +9,7 @@ public class WordGrid : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI output;
     [SerializeField] private GameObject currentElemnt;
     [SerializeField] private int xSize = 80;
-    [SerializeField] private int ySize = 20;
+    [SerializeField] private int ySize = 40;
     [SerializeField] private int zSize = 80;
     [SerializeField] private GameObject[,,] cubeGrid;
     [SerializeField] private GameObject sand;// 0
@@ -22,6 +22,9 @@ public class WordGrid : MonoBehaviour {
     [SerializeField] private GameObject fire;// 7
     [SerializeField] private GameObject oil;// 8
     [SerializeField] private GameObject cloud;// 9
+    [SerializeField] private GameObject salt;// 10
+    [SerializeField] private GameObject wood;// 11
+    [SerializeField] private GameObject saltyWater;//12
     [SerializeField] private static int spawnNumber = 0;
     [SerializeField] private float spawnRate = 0.1f;
     private float spawnTimer = 0f;
@@ -42,49 +45,61 @@ public class WordGrid : MonoBehaviour {
                 for (int z = 0; z < zSize; z++) {
                     if (cubeGrid[x, y, z] != null) {
                         if (cubeGrid[x, y, z].name == ("Sand(Clone)")) {
-                                CellBehavior(x, y, z, 0);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Water(Clone)")) {
-                                CellBehavior(x, y, z, 1);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Lava(Clone)")) {
-                                ElemntsInteract(x, y, z, 2);
-                                CellBehavior(x, y, z, 2);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Snow(Clone)")) {
-                                CellBehavior(x, y, z, 3);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Acid(Clone)")) {
-                                ElemntsInteract(x, y, z, 4);
-                                CellBehavior(x, y, z, 4);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Stone(Clone)")) {
-                                CellBehavior(x, y, z, 5);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Smoke(Clone)")) {
-                                CellBehavior(x, y, z, 6);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Fire(Clone)")) {
-                                ElemntsInteract(x, y, z, 7);
-                                CellBehavior(x, y, z, 7);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Oil(Clone)")) {
-                                CellBehavior(x, y, z, 8);
-                                continue;
-                            }
-                            if (cubeGrid[x, y, z].name == ("Cloud(Clone)")) {
-                                CellBehavior(x, y, z, 9);
-                                continue;
-                            }
-
+                            CellBehavior(x, y, z, 0);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Water(Clone)")) {
+                            CellBehavior(x, y, z, 1);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Lava(Clone)")) {
+                            ElemntsInteract(x, y, z, 2);
+                            CellBehavior(x, y, z, 2);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Snow(Clone)")) {
+                            CellBehavior(x, y, z, 3);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Acid(Clone)")) {
+                            ElemntsInteract(x, y, z, 4);
+                            CellBehavior(x, y, z, 4);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Stone(Clone)")) {
+                            CellBehavior(x, y, z, 5);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Smoke(Clone)")) {
+                            CellBehavior(x, y, z, 6);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Fire(Clone)")) {
+                            ElemntsInteract(x, y, z, 7);
+                            CellBehavior(x, y, z, 7);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Oil(Clone)")) {
+                            CellBehavior(x, y, z, 8);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Cloud(Clone)")) {
+                            CellBehavior(x, y, z, 9);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Salt(Clone)")) {
+                            ElemntsInteract(x, y, z, 10);
+                            CellBehavior(x, y, z, 10);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("Wood(Clone)")) {
+                            CellBehavior(x, y, z, 11);
+                            continue;
+                        }
+                        if (cubeGrid[x, y, z].name == ("saltyWater(Clone)")) {
+                            CellBehavior(x, y, z, 12);
+                            continue;
+                        }
                     }
                 }
             }
@@ -107,6 +122,29 @@ public class WordGrid : MonoBehaviour {
             int neighborZ = offset.z;
 
             if (IsInBounds(neighborX, neighborY, neighborZ) && cubeGrid[neighborX, neighborY, neighborZ] != null) {
+                if (cellType == 12) {//salty water 
+                    if (cubeGrid[neighborX, neighborY, neighborZ].name == "Lava(Clone)" || cubeGrid[neighborX, neighborY, neighborZ].name == "Fire(Clone)" || cubeGrid[neighborX, neighborY, neighborZ].name == "Acid(Clone)") {
+                        Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
+                        Destroy(cubeGrid[x, y, z]);
+                        Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
+                        GameObject cube = Instantiate(cloud, cubePosition, Quaternion.identity);
+                        StartCoroutine(destroyCounter(cube, 10, 9));
+                        while (cubeGrid[neighborX, neighborY, neighborZ] != null) {
+                            neighborY++;
+                        }
+                        cubeGrid[neighborX, neighborY, neighborZ] = cube;
+                        cubePosition = new Vector3(x, y, z);
+                        cube = Instantiate(salt, cubePosition, Quaternion.identity);
+                        cubeGrid[x, y, z] = cube;
+                    }
+                }
+                if(cellType==10&& cubeGrid[neighborX, neighborY, neighborZ].name == "Water(Clone)") {
+                    Destroy(cubeGrid[x, y, z]);
+                    Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
+                    Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
+                    cubeGrid[neighborX, neighborY, neighborZ] = Instantiate(saltyWater, cubePosition, Quaternion.identity);
+                    return;
+                }
                 if ((cellType == 2 || cellType == 7 || cellType == 4) && cubeGrid[neighborX, neighborY, neighborZ].name == "Water(Clone)") {
                     // Lava,Fire and water destroy each other and create a cloud 
                     Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
@@ -131,12 +169,12 @@ public class WordGrid : MonoBehaviour {
                 if (cellType == 4) {
                     if (cubeGrid[neighborX, neighborY, neighborZ].name == "Snow(Clone)") {
                         Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
-                        cubeGrid[neighborX, neighborY, neighborZ] = Instantiate(water, cubePosition, Quaternion.identity); 
-
+                        cubeGrid[neighborX, neighborY, neighborZ] = Instantiate(water, cubePosition, Quaternion.identity);
                     }
                     else {
                         if (!(cubeGrid[neighborX, neighborY, neighborZ].name == "Acid(Clone)")) {
                             Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
+                            Destroy(cubeGrid[x, y, z]);
                             Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
                             GameObject cube = Instantiate(smoke, cubePosition, Quaternion.identity);
                             StartCoroutine(destroyCounter(cube, 10, 6));
@@ -149,7 +187,7 @@ public class WordGrid : MonoBehaviour {
                     return;
                 }
                 if (cellType == 7) {
-                    if (cubeGrid[neighborX, neighborY, neighborZ].name == "Oil(Clone)" || cubeGrid[neighborX, neighborY, neighborZ].name == "Acid(Clone)") {
+                    if (cubeGrid[neighborX, neighborY, neighborZ].name == "Oil(Clone)" || cubeGrid[neighborX, neighborY, neighborZ].name == "Acid(Clone)"|| cubeGrid[neighborX, neighborY, neighborZ].name == "Wood(Clone)") {
                         Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
                         Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
                         cubeGrid[neighborX, neighborY, neighborZ] = Instantiate(fire, cubePosition, Quaternion.identity);
@@ -173,40 +211,40 @@ public class WordGrid : MonoBehaviour {
         int z = (int)elemnt.transform.position.z;
         if (elemnt != null) {
             Destroy(cubeGrid[x, y, z]);
-            if (type == 3||type==9) {// Create a water cell at the same position
+            if (type == 3 || type == 9) {// Create a water cell at the same position
                 Vector3 cubePosition = new Vector3(x, y, z);
-                cubeGrid[x, y, z] = Instantiate(water, cubePosition, Quaternion.identity); 
+                cubeGrid[x, y, z] = Instantiate(water, cubePosition, Quaternion.identity);
             }
         }
     }
 
     private void CellBehavior(int x, int y, int z, int cellType) {
         if (IsInBounds(x, y + 1, z)) {
-            if ((cellType == 6 || cellType == 9)) {
+            if ((cellType == 6 || cellType == 9)) {//smoke and cloud
                 MoveCube(x, y, z, x, y + 1, z);
                 return;
             }
-            if ((cellType == 8 && cubeGrid[x, y + 1, z] != null) && cubeGrid[x, y + 1, z].name == ("Water(Clone)")) {
+            if (((cellType == 8||cellType==11) && cubeGrid[x, y + 1, z] != null) && cubeGrid[x, y + 1, z].name == ("Water(Clone)")) { // oil and wood  flow on water
                 MoveCube(x, y, z, x, y + 1, z);
                 return;
             }
         }
         if (IsInBounds(x, y - 1, z)) {
-            if ((cubeGrid[x, y - 1, z] == null) && (cellType != 6 && cellType != 9)) {
+            if ((cubeGrid[x, y - 1, z] == null) && (cellType != 6 && cellType != 9)) {// every elemnt that isnt smoke and cloud moves down
                 MoveCube(x, y, z, x, y - 1, z);
                 return;
             }
 
-            if ((cellType == 0 || cellType == 3 || cellType == 5) && (cubeGrid[x, y - 1, z].name == ("Water(Clone)") || cubeGrid[x, y - 1, z].name == ("Oil(Clone)"))) {
+            if ((cellType == 0 || cellType == 3 || cellType == 5 ) && (cubeGrid[x, y - 1, z].name == ("Water(Clone)") || cubeGrid[x, y - 1, z].name == ("Oil(Clone)"))) {
                 MoveCube(x, y, z, x, y - 1, z);
                 return;
             }
         }
-        if (cellType == 5 || cellType == 7) {
+        if (cellType == 5 || cellType == 7 || cellType == 11) {// wood fire stone
             return;
         }
         Vector3Int[] neighborOffsets = null;
-        if (cellType == 0 || cellType == 3) {// sand and ice
+        if (cellType == 0 || cellType == 3 || cellType == 10) {// sand  ice  salt
             neighborOffsets = new Vector3Int[]
             {
                 new Vector3Int(-1, -3, 1),    // Left
@@ -307,49 +345,59 @@ public class WordGrid : MonoBehaviour {
                         int y = ySize - 1;
                         if (cubeGrid[x, y, z] == null || cubeGrid[x, y, z].GetComponent<BoxCollider>() == null) {
                             if (spawnNumber == 1) {
-                                Vector3 cubePosition = new Vector3(x, y, z);
-                                cubeGrid[x, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x, y, z]);
+                                if (IsInBounds(x, y, z)){
+                                    Vector3 cubePosition = new Vector3(x, y, z);
+                                    cubeGrid[x, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x, y, z]);
+                                }
                             }
                             if (spawnNumber == 0) {
                                 Vector3 cubePosition = new Vector3(x, y, z);
-                                cubeGrid[x, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x, y, z]);
-
-                                cubePosition = new Vector3(x + 1, y, z);
-                                cubeGrid[x + 1, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x + 1, y, z]);
-
-                                cubePosition = new Vector3(x - 1, y, z);
-                                cubeGrid[x - 1, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x - 1, y, z]);
-
-                                cubePosition = new Vector3(x , y, z + 1);
-                                cubeGrid[x, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x, y, z + 1]);
-
-                                cubePosition = new Vector3(x + 1, y, z + 1);
-                                cubeGrid[x + 1, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x + 1, y, z + 1]);
-
-                                cubePosition = new Vector3(x-1, y, z + 1);
-                                cubeGrid[x - 1, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x - 1, y, z + 1]);
-
-                                cubePosition = new Vector3(x, y, z-1);
-                                cubeGrid[x, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x, y, z - 1]);
-
-                                cubePosition = new Vector3(x-1, y, z-1);
-                                cubeGrid[x - 1, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x - 1, y, z - 1]);
-
-                                cubePosition = new Vector3(x + 1, y, z - 1);
-                                cubeGrid[x + 1, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
-                                AutuDestroy(cubeGrid[x + 1, y, z - 1]);
+                                if (IsInBounds(x, y, z)) {
+                                    cubeGrid[x, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x, y, z]);
+                                }
+                                if (IsInBounds(x + 1, y, z)) {
+                                    cubePosition = new Vector3(x + 1, y, z);
+                                    cubeGrid[x + 1, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x + 1, y, z]);
+                                }
+                                if (IsInBounds(x - 1, y, z)) {
+                                    cubePosition = new Vector3(x - 1, y, z);
+                                    cubeGrid[x - 1, y, z] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x - 1, y, z]);
+                                }
+                                if (IsInBounds(x, y, z + 1)) {
+                                    cubePosition = new Vector3(x, y, z + 1);
+                                    cubeGrid[x, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x, y, z + 1]);
+                                }
+                                if (IsInBounds(x + 1, y, z + 1)) {
+                                    cubePosition = new Vector3(x + 1, y, z + 1);
+                                    cubeGrid[x + 1, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x + 1, y, z + 1]);
+                                }
+                                if (IsInBounds(x - 1, y, z + 1)) {
+                                    cubePosition = new Vector3(x - 1, y, z + 1);
+                                    cubeGrid[x - 1, y, z + 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x - 1, y, z + 1]);
+                                }
+                                if (IsInBounds(x, y, z - 1)) {
+                                    cubePosition = new Vector3(x, y, z - 1);
+                                    cubeGrid[x, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x, y, z - 1]);
+                                }
+                                if (IsInBounds(x - 1, y, z - 1)) {
+                                    cubePosition = new Vector3(x - 1, y, z - 1);
+                                    cubeGrid[x - 1, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x - 1, y, z - 1]);
+                                }
+                                if (IsInBounds(x + 1, y, z - 1)) {
+                                    cubePosition = new Vector3(x + 1, y, z - 1);
+                                    cubeGrid[x + 1, y, z - 1] = Instantiate(currentElemnt, cubePosition, Quaternion.identity);
+                                    AutuDestroy(cubeGrid[x + 1, y, z - 1]);
+                                }
                             }
-
-
                         }
                     }
                     spawnTimer = spawnRate;
@@ -379,7 +427,7 @@ public class WordGrid : MonoBehaviour {
         spawnNumber = index;
     }
 
-        public void HandleButtonClick() {
+    public void HandleButtonClick() {
         Button clickedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
         if (clickedButton.name == ("Sand Button")) {
             currentElemnt = sand;
@@ -410,6 +458,12 @@ public class WordGrid : MonoBehaviour {
         }
         else if ((clickedButton.name == ("Cloud Button"))) {
             currentElemnt = cloud;
+        }
+        else if ((clickedButton.name == ("Salt Button"))) {
+            currentElemnt = salt;
+        }
+        else if ((clickedButton.name == ("Wood Button"))) {
+            currentElemnt = wood;
         }
     }
     public void ClearGrid() {
