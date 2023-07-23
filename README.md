@@ -20,7 +20,7 @@ https://www.youtube.com/playlist?list=PLOvCmpy3lU4yshcjsMLpbFAtVgZafQdbi
 # week 3 
     work on the gun class , add muzzle flash , bullet trail , bullet hit effect , fix the raycast 
 	fix the fireRate problem and make the gun more realistic by adding bullet spread for the gun  
-	(in total 5 hours of work ).
+	(in total 8 hours of work ).
 	video of the current progress:
 https://youtu.be/AiwKF44i9Uk
 # week 4
@@ -68,7 +68,7 @@ https://youtu.be/oLZWX5oUBW8
     - acid melt melt every other elemnt and disappear after 10 seconds
     - stone is a solid elemnt that doest interact with other elemnt 
     - smoke appears when melting elemnts in interacts like lava and water , acid with other elemnt .
-  - over all about 4 hours of work 
+  - over all about 8 hours of work 
 # week 11
     no progress this week due to final exams
 # week 12
@@ -113,5 +113,7 @@ fix some interactrs and program speed
   - some changes in the elemnts materials 
   - fix a bug that makes all fluids apple to move throw walls
   - over all about 8 hours of work 
+#week 16 
+
 
 
