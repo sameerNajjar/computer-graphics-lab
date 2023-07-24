@@ -8,9 +8,9 @@ using TMPro;
 public class WordGrid : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI output;
     [SerializeField] private GameObject currentElemnt;
-    [SerializeField] private int xSize = 80;
-    [SerializeField] private int ySize = 40;
-    [SerializeField] private int zSize = 80;
+    [SerializeField] private int xSize = 60;
+    [SerializeField] private int ySize = 30;
+    [SerializeField] private int zSize = 60;
     [SerializeField] private GameObject[,,] cubeGrid;
     [SerializeField] private GameObject sand;// 0
     [SerializeField] private GameObject water;// 1
@@ -98,6 +98,7 @@ public class WordGrid : MonoBehaviour {
                         }
                         if (cubeGrid[x, y, z].name == ("saltyWater(Clone)")) {
                             CellBehavior(x, y, z, 12);
+                            ElemntsInteract(x, y, z, 12);
                             continue;
                         }
                     }
@@ -123,7 +124,7 @@ public class WordGrid : MonoBehaviour {
 
             if (IsInBounds(neighborX, neighborY, neighborZ) && cubeGrid[neighborX, neighborY, neighborZ] != null) {
                 if (cellType == 12) {//salty water 
-                    if (cubeGrid[neighborX, neighborY, neighborZ].name == "Lava(Clone)" || cubeGrid[neighborX, neighborY, neighborZ].name == "Fire(Clone)" || cubeGrid[neighborX, neighborY, neighborZ].name == "Acid(Clone)") {
+                    if (cubeGrid[neighborX, neighborY, neighborZ].name == "Lava(Clone)" || cubeGrid[neighborX, neighborY, neighborZ].name == "Fire(Clone)") {
                         Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
                         Destroy(cubeGrid[x, y, z]);
                         Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
@@ -137,12 +138,20 @@ public class WordGrid : MonoBehaviour {
                         cube = Instantiate(salt, cubePosition, Quaternion.identity);
                         cubeGrid[x, y, z] = cube;
                     }
+                    return;
+                }
+                if ((cellType == 1 || cellType==12)&& cubeGrid[neighborX, neighborY, neighborZ].name == "Salt(Clone)") {
+                    Destroy(cubeGrid[x, y, z]);
+                    Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
+                    Vector3 cubePosition = new Vector3(x, y, z);
+                    cubeGrid[x, y, z] = Instantiate(saltyWater, cubePosition, Quaternion.identity);
+                    return;
                 }
                 if(cellType==10&& cubeGrid[neighborX, neighborY, neighborZ].name == "Water(Clone)") {
                     Destroy(cubeGrid[x, y, z]);
                     Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
-                    Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
-                    cubeGrid[neighborX, neighborY, neighborZ] = Instantiate(saltyWater, cubePosition, Quaternion.identity);
+                    Vector3 cubePosition = new Vector3(x, y, z);
+                    cubeGrid[x, y, z] = Instantiate(saltyWater, cubePosition, Quaternion.identity);
                     return;
                 }
                 if ((cellType == 2 || cellType == 7 || cellType == 4) && cubeGrid[neighborX, neighborY, neighborZ].name == "Water(Clone)") {
@@ -201,6 +210,20 @@ public class WordGrid : MonoBehaviour {
                         return;
                     }
                 }
+                if((cellType==7 || cellType==2)&& cubeGrid[neighborX, neighborY, neighborZ].name == "saltyWater(Clone)") {
+                    Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
+                    Destroy(cubeGrid[x, y, z]);
+                    Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
+                    GameObject cube = Instantiate(cloud, cubePosition, Quaternion.identity);
+                    StartCoroutine(destroyCounter(cube, 10, 9));
+                    while (cubeGrid[neighborX, neighborY, neighborZ] != null) {
+                        neighborY++;
+                    }
+                    cubeGrid[neighborX, neighborY, neighborZ] = cube;
+                    cubePosition = new Vector3(x, y, z);
+                    cube = Instantiate(salt, cubePosition, Quaternion.identity);
+                    cubeGrid[x, y, z] = cube;
+                }
             }
         }
     }
@@ -222,31 +245,31 @@ public class WordGrid : MonoBehaviour {
         if (IsInBounds(x, y + 1, z)) {
             if ((cellType == 6 || cellType == 9)) {//smoke and cloud
                 MoveCube(x, y, z, x, y + 1, z);
-                return;
             }
-            if (((cellType == 8||cellType==11) && cubeGrid[x, y + 1, z] != null) && cubeGrid[x, y + 1, z].name == ("Water(Clone)")) { // oil and wood  flow on water
-                MoveCube(x, y, z, x, y + 1, z);
-                return;
+            if (((cellType == 8||cellType==11)) ){ // oil and wood  flow on water
+                while ((IsInBounds(x, y + 1, z)&&(cubeGrid[x, y + 1, z]!=null)) && (cubeGrid[x, y + 1, z].name == ("Water(Clone)") || cubeGrid[x, y + 1, z].name == ("saltyWater(Clone)"))) {
+                    MoveCube(x, y, z, x, y + 1, z);
+                }
             }
         }
         if (IsInBounds(x, y - 1, z)) {
             if ((cubeGrid[x, y - 1, z] == null) && (cellType != 6 && cellType != 9)) {// every elemnt that isnt smoke and cloud moves down
                 MoveCube(x, y, z, x, y - 1, z);
-                return;
             }
 
-            if ((cellType == 0 || cellType == 3 || cellType == 5 ) && (cubeGrid[x, y - 1, z].name == ("Water(Clone)") || cubeGrid[x, y - 1, z].name == ("Oil(Clone)"))) {
+            if ((cellType == 0 || cellType == 3 || cellType == 5 ) && (cubeGrid[x, y - 1, z].name == ("Water(Clone)") || (cubeGrid[x, y - 1, z].name == ("saltyWater(Clone)") || cubeGrid[x, y - 1, z].name == ("Oil(Clone)")))) {
                 MoveCube(x, y, z, x, y - 1, z);
-                return;
             }
         }
         if (cellType == 5 || cellType == 7 || cellType == 11) {// wood fire stone
             return;
         }
         Vector3Int[] neighborOffsets = null;
-        if (cellType == 0 || cellType == 3 || cellType == 10) {// sand  ice  salt
-            neighborOffsets = new Vector3Int[]
-            {
+        moveTimer -= Time.deltaTime;
+        if (moveTimer <= 0f) {
+            if (cellType == 0 || cellType == 3 || cellType == 10) {// sand  ice  salt
+                neighborOffsets = new Vector3Int[]
+                {
                 new Vector3Int(-1, -3, 1),    // Left
                 new Vector3Int(-1, -3, 0),     // Right
                 new Vector3Int(-1, -3, -1),    // Back
@@ -255,11 +278,11 @@ public class WordGrid : MonoBehaviour {
                 new Vector3Int(1, -3, 1),    // Bottom Right
                 new Vector3Int(1, -3, 0),    // Bottom Right
                 new Vector3Int(1, -3, -1),    // Bottom Right
-            };
-        }
-        else if (cellType == 1 || cellType == 2 || cellType == 4 || cellType == 6 || cellType == 8 || cellType == 9) { // water,lava,acid,smoke,oil,cloud move like fluid
-            neighborOffsets = new Vector3Int[]
-            {
+                };
+            }
+            else if (cellType == 1 || cellType == 2 || cellType == 4 || cellType == 6 || cellType == 8 || cellType == 9 || cellType == 12) { // water,lava,acid,smoke,oil,cloud move like fluid
+                neighborOffsets = new Vector3Int[]
+                {
                 new Vector3Int(-1, 0, 1),    // Left
                 new Vector3Int(-1, 0, 0),     // Right
                 new Vector3Int(-1, 0, -1),    // Back
@@ -268,55 +291,63 @@ public class WordGrid : MonoBehaviour {
                 new Vector3Int(1, 0, 1),    // Bottom Right
                 new Vector3Int(1, 0, 0),    // Bottom Right
                 new Vector3Int(1, 0, -1),    // Bottom Right
-            };
-        }
-        // Count the number of empty neighbors
-        int emptyNeighborCount = 0;
-        foreach (Vector3Int offset in neighborOffsets) {
-            int neighborX = x + offset.x;
-            int neighborY = y + offset.y;
-            int neighborZ = z + offset.z;
-            // Check if the neighbor is within bounds and empty
-            if (IsInBounds(neighborX, neighborY, neighborZ) && cubeGrid[neighborX, neighborY, neighborZ] == null)
-                emptyNeighborCount++;
-        }
-
-        // If there are empty neighbors, move the cube randomly to one of them
-        if (emptyNeighborCount > 0) {
-            // Select a random empty neighbor
-            int randomIndex = Random.Range(0, emptyNeighborCount);
-            int emptyNeighborIndex = 0;
-            Vector3Int selectedOffset = Vector3Int.zero;
+                };
+            }
+            // Count the number of empty neighbors
+            int emptyNeighborCount = 0;
             foreach (Vector3Int offset in neighborOffsets) {
                 int neighborX = x + offset.x;
                 int neighborY = y + offset.y;
                 int neighborZ = z + offset.z;
                 // Check if the neighbor is within bounds and empty
-                if (IsInBounds(neighborX, neighborY, neighborZ) && cubeGrid[neighborX, neighborY, neighborZ] == null) {
-                    if (emptyNeighborIndex == randomIndex) {
-                        selectedOffset = offset;
-                        break;
-                    }
-                    emptyNeighborIndex++;
-                }
+                if (IsInBounds(neighborX, neighborY, neighborZ) && cubeGrid[neighborX, neighborY, neighborZ] == null)
+                    emptyNeighborCount++;
             }
-            int targetX = x + selectedOffset.x;
-            int targetY = y + selectedOffset.y;
-            int targetZ = z + selectedOffset.z;
-            MoveCube(x, y, z, targetX, targetY, targetZ);
+
+            // If there are empty neighbors, move the cube randomly to one of them
+            if (emptyNeighborCount > 0) {
+                // Select a random empty neighbor
+                int randomIndex = Random.Range(0, emptyNeighborCount);
+                int emptyNeighborIndex = 0;
+                Vector3Int selectedOffset = Vector3Int.zero;
+                foreach (Vector3Int offset in neighborOffsets) {
+                    int neighborX = x + offset.x;
+                    int neighborY = y + offset.y;
+                    int neighborZ = z + offset.z;
+                    // Check if the neighbor is within bounds and empty
+                    if (IsInBounds(neighborX, neighborY, neighborZ) && cubeGrid[neighborX, neighborY, neighborZ] == null) {
+                        if (emptyNeighborIndex == randomIndex) {
+                            selectedOffset = offset;
+                            break;
+                        }
+                        emptyNeighborIndex++;
+                    }
+                }
+                int targetX = x + selectedOffset.x;
+                int targetY = y + selectedOffset.y;
+                int targetZ = z + selectedOffset.z;
+                MoveCube(x, y, z, targetX, targetY, targetZ);
+            }
+            moveTimer = moveDelay;
+
         }
     }
     private void MoveCube(int startX, int startY, int startZ, int targetX, int targetY, int targetZ) {
         if (IsInBounds(startX, startY, startZ) && IsInBounds(targetX, targetY, targetZ)) {
             GameObject cube = cubeGrid[startX, startY, startZ];
-            cubeGrid[startX, startY, startZ] = cubeGrid[targetX, targetY, targetZ];
-            cubeGrid[targetX, targetY, targetZ] = cube;
-            if (cube != null) {
+            GameObject targetCube = cubeGrid[targetX, targetY, targetZ];
+                cubeGrid[startX, startY, startZ] = targetCube;
+                cubeGrid[targetX, targetY, targetZ] = cube;
                 Vector3 cubePosition = new Vector3(targetX, targetY, targetZ);
+            if (cube != null) {
                 cube.transform.position = cubePosition;
             }
-        }
+            if (targetCube!=null) {
+                targetCube.transform.position = new Vector3(startX, startY, startZ);
+            }
+            }
     }
+   
 
 
     private bool IsInBounds(int x, int y, int z) {

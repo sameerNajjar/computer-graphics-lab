@@ -114,6 +114,17 @@ fix some interactrs and program speed
   - fix a bug that makes all fluids apple to move throw walls
   - over all about 8 hours of work 
 #week 16 
+  - fix a bug in sand and water 
+  - fix a bug when wood is under water they move to the same cube
+  - fix a bug with lava and salty water create infinity water 
+  - fix a bug in the interact between oil and water
+  - fix other bugs with elemnts interacts
+  - fix a bug that allow to elemnts to enter the same cell in the grid 
+  - fix a bug that cause a crash and freeze when oil interact with water and fire in the same time .
+  - make the grid smaller to improve pefomnce (also it was way to big and hard to control)
+  - make the buttons bigger and easier to click
+  - over all about 8 hours of work 
+
 
 
 
