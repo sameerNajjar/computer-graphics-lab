@@ -192,7 +192,7 @@ public class WordGrid : MonoBehaviour {
                     }
                     return;
                 }
-                if (cellType == 7) {
+                if (cellType == 7||cellType==2) {
                     if (cubeGrid[neighborX, neighborY, neighborZ].name == "Oil(Clone)" || cubeGrid[neighborX, neighborY, neighborZ].name == "Acid(Clone)"|| cubeGrid[neighborX, neighborY, neighborZ].name == "Wood(Clone)") {
                         Destroy(cubeGrid[neighborX, neighborY, neighborZ]);
                         Vector3 cubePosition = new Vector3(neighborX, neighborY, neighborZ);
