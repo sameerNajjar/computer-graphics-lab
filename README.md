@@ -124,6 +124,13 @@ fix some interactrs and program speed
   - make the grid smaller to improve pefomnce (also it was way to big and hard to control)
   - make the buttons bigger and easier to click
   - over all about 8 hours of work 
+#week 17
+  - fix build errors 
+  - adjust the preapre the project to the finale build 
+  - fix problems with canvas 
+  - fix some bugs in the elemnts and the gui 
+  - build and finish the project 
+  
 
 
 

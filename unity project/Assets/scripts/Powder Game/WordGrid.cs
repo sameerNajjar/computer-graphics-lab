@@ -1,16 +1,13 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using System.Collections;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using TMPro;
 public class WordGrid : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI output;
     [SerializeField] private GameObject currentElemnt;
-    [SerializeField] private int xSize = 60;
-    [SerializeField] private int ySize = 30;
-    [SerializeField] private int zSize = 60;
+    [SerializeField] private int xSize = 80;
+    [SerializeField] private int ySize = 40;
+    [SerializeField] private int zSize = 80;
     [SerializeField] private GameObject[,,] cubeGrid;
     [SerializeField] private GameObject sand;// 0
     [SerializeField] private GameObject water;// 1
@@ -35,7 +32,7 @@ public class WordGrid : MonoBehaviour {
 
 
     private void Start() {
-        cubeGrid = new GameObject[xSize, ySize, zSize];
+        cubeGrid = new GameObject[xSize, ySize+1, zSize];
     }
 
     private void Update() {
