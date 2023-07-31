@@ -14,7 +14,7 @@ Download and Run:
 
 About the game:
  - the game is inspired by 2d falling sand and powder games.
- - the main feature of the game and the hardest chalnge is that unlike other falling sand 
+ - the main feature of the game and the hardest challenge is that unlike other falling sand 
  and powder game the game is 3D not 2D
  - the game contains 12 elements:
     - sand:
