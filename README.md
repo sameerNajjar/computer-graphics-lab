@@ -1,70 +1,88 @@
-# Computer graphics lab University of Haifa
+# 3D Powder Game
 
-Student: Sameer Najjar 
+## Overview
 
-Project: 3D Powder Game.
+The **3D Powder Game** is an immersive simulation game inspired by 2D falling sand and powder games, but with a unique twist: it is designed in a 3D environment. This game leverages a 3D grid system where each cube represents an element, and the grid is dynamically updated each frame to simulate realistic interactions and behaviors of various elements.
 
-Project directed by: Dr. Roi Poranne
+## Implementation Details
 
-Project Playlist:
-  - https://www.youtube.com/playlist?list=PLOvCmpy3lU4yshcjsMLpbFAtVgZafQdbi
-  
-Download and Run:
-  - download Game.zip from the repo unzip it and run 3D-Powder-Game.exe
+The game utilizes a 3D grid system, where each cube in the grid represents an element. The grid is updated each frame to simulate the physics and interactions of these elements. Key features of the implementation include:
 
-About the game:
- - the game is inspired by 2d falling sand and powder games.
- - the main feature of the game and the hardest challenge is that unlike other falling sand 
- and powder game the game is 3D not 2D
- - the game contains 12 elements:
-    - sand:
-	    - sand precipitates in water and oil 
-		- fire and lava cant burn it 
-		- only acid can destroy sand particles
-	- water:
-	    - water flows over solid particles like sand and stone
-		- water evaporates when its near lava , fire, and acid and creates a cloud particle
-		- water extinguishes fire and lava 
-	- snow:
-	    - snow melts after 5s automatically 
-		- snow melts if it touches lava,fire and acid particles
-		- when snow melts it creates a water particle 
-		- snow particles move the same as sand particles 
-	- lava:
-	    - lava particles automatically disappear after 10 seconds
-		- lava extinguishes when touching water 
-		- lava can also burn acid and oil 
-		- lava particles are fluids so their movement is similar to water 
-	- Acid:
-	    - lava particles automatically disappear after 10 seconds
-		- acid particles can destroy every other particle
-		- acid particles are fluids so they move similar to lava and water 
-	- stone:
-	    - stone is a solid particle 
-		- it doesn't interact with any other particle 
-		- only acid can interact with stone and destroy it 
-	- smoke:
-	    - smoke appears when lava,fire and acid burn any element 
-		- smoke it fluid so its moves like other fluid (but in the sky)
-		- smoke automatically disappears after 10s 
-	- fire:
-	    - the difference between fire and lava is that fire isn't a fluid like lava
-		- since fire isn't a fluid its only spread when it can burn its neighbors
-		- fire automatically disappears after 10s
-	- oil:
-	    - oil flow over water
-		- oil can get burned and become fire when touching fire or lava
-		- oil is fluid
-	- cloud:
-	    - cloud rains water after 5 seconds 
-		- clouds disappear after 10 seconds
-		- cloud is a fluid so its moves like smoke
-		- clouds appear when evaporates water
-	- salt :
-	    - salt melts in water 
-		- salt moves like sand and snow
-		- when salt melts in water and that water evaporates salt appears again 
-	- wood :
-	    - wood is a solid element like stone
-		- wood flow over water
-		- fire and lava can burn wood 
+- **3D Grid Management:** Each cube in the grid represents a particle, with the grid being updated every frame to reflect changes in element state and interactions.
+- **Physics Simulation:** The game applies physics rules to simulate realistic behavior of elements, including fluid dynamics for water, oil, and acid, and particle interactions such as burning and melting.
+- **Real-time Updates:** Element interactions are processed in real-time, allowing for dynamic changes and interactions within the 3D environment.
+
+
+## How to Download and Run
+
+1. **Download the Game:**
+   - Download `Game.zip` from the repository.
+   - Unzip the file.
+
+2. **Run the Game:**
+   - Execute `3D-Powder-Game.exe` to start playing.
+
+## Game Features
+
+The game includes twelve distinct elements, each with unique properties and interactions:
+
+- **Sand:**
+  - Precipitates in water and oil.
+  - Fire and lava cannot burn sand.
+  - Acid is the only substance that can destroy sand particles.
+
+- **Water:**
+  - Flows over solid particles like sand and stone.
+  - Evaporates near lava, fire, and acid, creating cloud particles.
+  - Extinguishes fire and lava.
+
+- **Snow:**
+  - Melts automatically after 5 seconds.
+  - Melts when touching lava, fire, or acid, turning into water.
+  - Moves like sand.
+
+- **Lava:**
+  - Disappears automatically after 10 seconds.
+  - Extinguishes upon contact with water.
+  - Burns acid and oil.
+  - Moves like water due to its fluid nature.
+
+- **Acid:**
+  - Destroys every other particle upon contact.
+  - Moves like lava and water due to its fluid characteristics.
+
+- **Stone:**
+  - Solid and does not interact with other particles.
+  - Only acid can destroy stone.
+
+- **Smoke:**
+  - Appears when lava, fire, or acid burn other elements.
+  - Moves like a fluid but stays in the sky.
+  - Disappears after 10 seconds.
+
+- **Fire:**
+  - Unlike lava, fire is not a fluid.
+  - Spreads only to burn neighboring particles.
+  - Disappears after 10 seconds.
+
+- **Oil:**
+  - Flows over water.
+  - Can ignite to become fire when touching fire or lava.
+  - Fluid in nature.
+
+- **Cloud:**
+  - Rains water after 5 seconds.
+  - Disappears after 10 seconds.
+  - Moves like smoke.
+  - Appears when water evaporates.
+
+- **Salt:**
+  - Melts in water.
+  - Moves like sand and snow.
+  - Reappears when evaporated water is gone.
+
+- **Wood:**
+  - Solid like stone.
+  - Floats on water.
+  - Can be burned by fire and lava.
+
